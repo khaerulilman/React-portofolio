@@ -2,7 +2,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-800 text-white py-10">
       <div className="container mx-auto px-6 text-center md:text-left">
-        <div className="flex justify-around">
+        <div className="flex flex-col md:flex-row justify-around space-y-8 md:space-y-0">
           {/* Social Media Section */}
           <div>
             <h3 className="font-semibold text-lg mb-4">Follow Us</h3>
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="mt-8 text-sm text-center">
-          <p>&copy; 2025 My Landing Page. All rights reserved.</p>
+          <p>&copy; 2025 Ilman. All rights reserved.</p>
         </div>
       </div>
     </footer>
