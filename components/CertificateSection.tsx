@@ -17,7 +17,6 @@ const staggerChildren = {
 const CertificateSection = () => {
   const certificates = [
     {
-      imageUrl: "",
       title: "Certificate",
       description: "Working on. In progress...",
     },
@@ -48,7 +47,6 @@ const CertificateSection = () => {
                 className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-shadow"
               >
                 <img
-                  src={cert.imageUrl}
                   alt={cert.title}
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />

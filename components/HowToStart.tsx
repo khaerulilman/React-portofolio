@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useCallback } from "react";
+import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const HowToStart = () => {
   const steps = [
@@ -44,94 +44,183 @@ const HowToStart = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const itemsPerPage = 5;
+  const autoScrollInterval = 3000; // 3 seconds
+
+  const controls = useAnimation();
 
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const fadeInVariant = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-  };
-
-  const hoverVariant = {
-    hover: { scale: 1.2, rotate: 15, transition: { duration: 0.3 } },
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) =>
-      Math.min(prev + itemsPerPage, steps.length - itemsPerPage)
-    );
-  };
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => {
+      const nextIndex = prev + 1;
+      return nextIndex >= steps.length - itemsPerPage ? 0 : nextIndex;
+    });
+  }, [steps.length, itemsPerPage]);
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - itemsPerPage, 0));
+    setCurrentIndex((prev) => {
+      const nextIndex = prev - 1;
+      return nextIndex < 0 ? steps.length - itemsPerPage - 1 : nextIndex;
+    });
   };
 
-  const visibleSteps = steps.slice(currentIndex, currentIndex + itemsPerPage);
+  // Auto-scroll effect
+  useEffect(() => {
+    let interval: number | NodeJS.Timeout;
+    if (isAutoScrolling && !isHovered) {
+      interval = setInterval(handleNext, autoScrollInterval);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoScrolling, isHovered, handleNext]);
+
+  const toggleAutoScroll = () => {
+    setIsAutoScrolling(!isAutoScrolling);
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
+  const iconVariants = {
+    idle: { scale: 1, rotate: 0 },
+    hover: {
+      scale: 1.2,
+      rotate: [0, -10, 10, -10, 0],
+      transition: {
+        rotate: {
+          duration: 0.5,
+          repeat: Infinity,
+          repeatType: "reverse",
+        },
+      },
+    },
+  };
 
   return (
-    <div>
-      <section className="py-20 bg-blue-600">
+    <div className="relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800">
         <div className="container mx-auto text-center text-white px-4">
           <motion.h2
             ref={ref}
-            className="text-3xl font-bold mb-12"
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={fadeInVariant}
+            className="text-4xl font-bold mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+            transition={{ duration: 0.6 }}
           >
-            My <span className="text-yellow-400">Skills</span>
+            My{" "}
+            <span className="text-yellow-400 inline-block animate-pulse">
+              Skills
+            </span>
           </motion.h2>
 
-          <div className="relative max-w-4xl mx-auto">
-            <div className="flex justify-between items-center">
+          <div
+            className="relative max-w-6xl mx-auto"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <motion.div
+              className="flex justify-between items-center"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               <button
                 onClick={handlePrev}
-                disabled={currentIndex === 0}
-                className={`absolute left-0 z-10 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors ${
-                  currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className="absolute left-0 z-10 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all transform hover:scale-110"
               >
                 <ChevronLeft className="w-6 h-6 text-white" />
               </button>
 
-              <div className="flex justify-center items-start space-x-6 overflow-hidden px-12">
-                {visibleSteps.map((step) => (
-                  <motion.div
-                    key={step.id}
-                    className="flex flex-col items-center space-y-4 w-40"
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"}
-                    variants={fadeInVariant}
-                  >
+              <div className="flex justify-center items-start space-x-8 overflow-hidden px-16">
+                {steps
+                  .slice(currentIndex, currentIndex + itemsPerPage)
+                  .map((step, index) => (
                     <motion.div
-                      className="bg-white text-blue-600 w-16 h-16 flex items-center justify-center rounded-full text-2xl shadow-lg"
-                      whileHover="hover"
-                      variants={hoverVariant}
+                      key={step.id}
+                      className="flex flex-col items-center space-y-4 w-44"
+                      variants={itemVariants}
+                      custom={index}
+                      initial="hidden"
+                      animate="visible"
+                      layout
                     >
-                      {step.icon}
+                      <motion.div
+                        className="bg-white text-blue-600 w-20 h-20 flex items-center justify-center rounded-full text-3xl shadow-lg hover:shadow-xl transform transition-all"
+                        variants={iconVariants}
+                        initial="idle"
+                        whileHover="hover"
+                      >
+                        {step.icon}
+                      </motion.div>
+                      <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-yellow-300">
+                        {step.title}
+                      </h3>
+                      <p className="text-white/80 text-sm font-light">
+                        {step.description}
+                      </p>
                     </motion.div>
-                    <h3 className="text-xl font-bold">{step.title}</h3>
-                    <p className="text-white/80 text-sm">{step.description}</p>
-                  </motion.div>
-                ))}
+                  ))}
               </div>
 
               <button
                 onClick={handleNext}
-                disabled={currentIndex >= steps.length - itemsPerPage}
-                className={`absolute right-0 z-10 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors ${
-                  currentIndex >= steps.length - itemsPerPage
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
-                }`}
+                className="absolute right-0 z-10 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all transform hover:scale-110"
               >
                 <ChevronRight className="w-6 h-6 text-white" />
               </button>
-            </div>
+            </motion.div>
+
+            {/* Auto-scroll toggle button */}
+            <button
+              onClick={toggleAutoScroll}
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-12 bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all"
+            >
+              {isAutoScrolling ? (
+                <Pause className="w-5 h-5 text-white" />
+              ) : (
+                <Play className="w-5 h-5 text-white" />
+              )}
+            </button>
+          </div>
+
+          {/* Progress indicators */}
+          <div className="flex justify-center mt-16 space-x-2">
+            {Array.from({ length: Math.ceil(steps.length / itemsPerPage) }).map(
+              (_, idx) => (
+                <div
+                  key={idx}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    Math.floor(currentIndex / itemsPerPage) === idx
+                      ? "w-8 bg-yellow-400"
+                      : "w-2 bg-white/30"
+                  }`}
+                />
+              )
+            )}
           </div>
         </div>
       </section>
