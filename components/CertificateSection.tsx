@@ -20,7 +20,7 @@ const CertificateSection = () => {
     {
       title: "Certificate",
       description: "Working on. In progress...",
-      imageSrc: "/placeholder.jpg", // Add a valid image path here
+      imageSrc: "/assets/images/default.png", // Add a valid image path here
     },
   ];
 

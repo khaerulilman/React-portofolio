@@ -3,14 +3,32 @@ import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
 
-// Shared animation variants
+// Define the fadeInUp animation variant
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-// Project Item Component
-const ProjectItem = ({ project, index }) => {
+// Define the Project interface
+interface Project {
+  imgSrc: string;
+  altText: string;
+  title: string;
+  description: string;
+  tech: string[];
+  links: {
+    demo: string;
+    github: string;
+  };
+}
+
+// Props for the ProjectItem component
+interface ProjectItemProps {
+  project: Project;
+  index: number;
+}
+
+const ProjectItem: React.FC<ProjectItemProps> = ({ project, index }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -21,10 +39,7 @@ const ProjectItem = ({ project, index }) => {
       ref={ref}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
-      variants={{
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-      }}
+      variants={fadeInUp}
       className={`flex flex-col ${
         index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
       } items-center gap-12`}
