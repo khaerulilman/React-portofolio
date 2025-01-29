@@ -27,7 +27,7 @@ const MotivationSection = () => {
           }}
         >
           <blockquote className="text-2xl md:text-4xl font-serif italic text-blueCustom mb-8">
-            "The Only Way to Do Great Work is to Love What You Do."
+            The Only Way to Do Great Work is to Love What You Do.
           </blockquote>
           <cite className="text-xl md:text-2xl font-semibold text-black block">
             - Steve Jobs
