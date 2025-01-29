@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -19,6 +20,7 @@ const CertificateSection = () => {
     {
       title: "Certificate",
       description: "Working on. In progress...",
+      imageSrc: "/placeholder.jpg", // Add a valid image path here
     },
   ];
 
@@ -46,8 +48,11 @@ const CertificateSection = () => {
                 whileHover={{ y: -10 }}
                 className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-shadow"
               >
-                <img
+                <Image
+                  src={cert.imageSrc}
                   alt={cert.title}
+                  width={500} // Adjust width as needed
+                  height={300} // Adjust height as needed
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
                 <h3 className="text-xl font-rounded font-semibold text-blueCustom">

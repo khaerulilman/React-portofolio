@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const navItems = [
+  { name: "Home", section: "home" },
+  { name: "About Me", section: "features" },
+  { name: "My Project", section: "DocumentationSection" },
+  { name: "Certificate", section: "certificate" },
+];
+
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navItems = [
-    { name: "Home", section: "home" },
-    { name: "About Me", section: "features" },
-    { name: "My Project", section: "DocumentationSection" },
-    { name: "Certificate", section: "certificate" },
-  ];
 
   // Handle smooth scrolling
   const scrollToSection = (sectionId: string) => {
@@ -50,7 +50,7 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, []); // Tidak perlu memasukkan `navItems` ke dalam dependency array
 
   return (
     <>

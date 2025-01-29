@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
@@ -48,8 +48,6 @@ const HowToStart = () => {
   const [isHovered, setIsHovered] = useState(false);
   const itemsPerPage = 5;
   const autoScrollInterval = 3000; // 3 seconds
-
-  const controls = useAnimation();
 
   const { ref, inView } = useInView({
     triggerOnce: true,
