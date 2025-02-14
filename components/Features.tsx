@@ -11,13 +11,6 @@ const Features = () => {
       color: "from-blue-400 to-blue-600",
     },
     {
-      title: "AI Generative Tools",
-      description:
-        "Passionate about leveraging cutting-edge AI technologies to create innovative solutions. Experienced in integrating AI-powered features to enhance application capabilities.",
-      icon: <Bot className="w-10 h-10" />,
-      color: "from-purple-400 to-purple-600",
-    },
-    {
       title: "Database and API Integration",
       description:
         "Proficient in developing and integrating third-party APIs, implementing secure payment gateways, and managing real-time data synchronization. Experienced in creating comprehensive API documentation and maintaining API versioning.",
