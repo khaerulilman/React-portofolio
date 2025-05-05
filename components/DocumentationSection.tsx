@@ -141,15 +141,6 @@ const DocumentationSection = () => {
       tech: ["React", "Node.js", "Flowise AI", "Neon DB"],
     },
     {
-      imgSrc: "/assets/images/pelayan.jpeg",
-      altText: "Public Service Platform",
-      title: "Community Service Portal",
-      description:
-        "A platform designed to accommodate and channel public aspirations regarding access to public facilities and infrastructure services. Developed with Laravel framework and SQLite database. ~ Course Project",
-      links: { demo: "#", github: "#" },
-      tech: ["Laravel", "SQLite", "Bootstrap", "PHP"],
-    },
-    {
       imgSrc: "/assets/images/chatter.jpeg",
       altText: "Social Media Platform",
       title: "Chatter - Social Network",
