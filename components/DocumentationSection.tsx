@@ -174,10 +174,10 @@ const DocumentationSection = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="text-4xl md:text-5xl font-bold mb-16 text-center"
+          className="text-4xl md:text-5xl font-extrabold mb-16 text-center"
         >
           <span className="text-white">My</span>{" "}
-          <span className="text-yellowCustom">New Projects</span>
+          <span className="text-yellowCustom">Projects</span>
         </motion.h2>
 
         <div className="space-y-32">

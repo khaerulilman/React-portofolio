@@ -35,7 +35,7 @@ const CertificateSection = () => {
       <div className="container mx-auto px-4">
         <motion.h2
           variants={fadeInUp}
-          className="text-4xl font-rounded font-bold mb-12 text-blueCustom text-center"
+          className="text-4xl font-rounded font-extrabold mb-12 text-blueCustom text-center"
         >
           My <span className="text-yellowCustom">Certificate</span>
         </motion.h2>

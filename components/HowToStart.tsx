@@ -5,42 +5,22 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const HowToStart = () => {
   const steps = [
-    { id: 1, title: "JavaScript", description: "Learn JavaScript", icon: "🟨" },
-    { id: 2, title: "Node.js", description: "Master Node.js", icon: "🌳" },
-    { id: 3, title: "React", description: "Understand React", icon: "⚛️" },
-    {
-      id: 4,
-      title: "Tailwind CSS",
-      description: "Work with Tailwind",
-      icon: "🌬️",
-    },
-    { id: 5, title: "Laravel", description: "Build with Laravel", icon: "🚀" },
-    { id: 6, title: "MySQL", description: "Database with MySQL", icon: "🐬" },
-    {
-      id: 7,
-      title: "PostgreSQL",
-      description: "Explore PostgreSQL",
-      icon: "🐘",
-    },
-    {
-      id: 8,
-      title: "Neon Database",
-      description: "Use Neon Database",
-      icon: "🌈",
-    },
-    { id: 9, title: "Firebase", description: "Integrate Firebase", icon: "🔥" },
-    {
-      id: 10,
-      title: "Next.js",
-      description: "Develop with Next.js",
-      icon: "⚡",
-    },
-    {
-      id: 11,
-      title: "Flowise AI",
-      description: "Harness Flowise AI",
-      icon: "🧠",
-    },
+    { id: 1, title: "JavaScript", icon: "🟨" },
+    { id: 2, title: "Node.js", icon: "🌳" },
+    { id: 3, title: "React", icon: "⚛️" },
+    { id: 4, title: "Tailwind CSS", icon: "🌬️" },
+    { id: 5, title: "JavaScript", icon: "🟨" },
+    { id: 6, title: "Node.js", icon: "🌳" },
+    { id: 7, title: "React", icon: "⚛️" },
+    { id: 8, title: "Tailwind CSS", icon: "🌬️" },
+    { id: 9, title: "JavaScript", icon: "🟨" },
+    { id: 10, title: "Node.js", icon: "🌳" },
+    { id: 11, title: "React", icon: "⚛️" },
+    { id: 12, title: "Tailwind CSS", icon: "🌬️" },
+    { id: 13, title: "JavaScript", icon: "🟨" },
+    { id: 14, title: "Node.js", icon: "🌳" },
+    { id: 15, title: "React", icon: "⚛️" },
+    { id: 16, title: "Tailwind CSS", icon: "🌬️" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -70,12 +50,18 @@ const HowToStart = () => {
 
   // Auto-scroll effect
   useEffect(() => {
-    let interval: number | NodeJS.Timeout;
+    let interval: NodeJS.Timeout | undefined;
+
     if (isAutoScrolling && !isHovered) {
       interval = setInterval(handleNext, autoScrollInterval);
     }
-    return () => clearInterval(interval);
-  }, [isAutoScrolling, isHovered, handleNext]);
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isAutoScrolling, isHovered, handleNext, autoScrollInterval]);
 
   const toggleAutoScroll = () => {
     setIsAutoScrolling(!isAutoScrolling);
@@ -119,24 +105,25 @@ const HowToStart = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800">
-        <div className="container mx-auto text-center text-white px-4">
+    <div className="relative overflow-hidden bg-gradient-to-b from-yellowCustom to-yellow-100">
+      <section className="py-20">
+        <div className="container mx-auto text-center px-4">
           <motion.h2
             ref={ref}
-            className="text-4xl font-bold mb-12"
+            className="text-4xl md:text-5xl font-extrabold mb-12 text-white tracking-tight"
             initial={{ opacity: 0, y: -20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.6 }}
           >
             My{" "}
-            <span className="text-yellow-400 inline-block animate-pulse">
+            <span className="text-blueCustom inline-block relative">
               Skills
+              <span className="absolute -bottom-2 left-0 w-full h-1 bg-blueCustom rounded-full"></span>
             </span>
           </motion.h2>
 
           <div
-            className="relative max-w-6xl mx-auto"
+            className="relative max-w-6xl mx-auto bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -148,18 +135,18 @@ const HowToStart = () => {
             >
               <button
                 onClick={handlePrev}
-                className="absolute left-0 z-10 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all transform hover:scale-110"
+                className="absolute left-4 z-10 p-3 rounded-full bg-blueCustom hover:bg-bg-blueCustom transition-all transform hover:scale-110 shadow-lg hover:shadow-purple-400/50"
               >
                 <ChevronLeft className="w-6 h-6 text-white" />
               </button>
 
-              <div className="flex justify-center items-start space-x-8 overflow-hidden px-16">
+              <div className="flex justify-center items-center space-x-16 overflow-hidden px-20">
                 {steps
                   .slice(currentIndex, currentIndex + itemsPerPage)
                   .map((step, index) => (
                     <motion.div
                       key={step.id}
-                      className="flex flex-col items-center space-y-4 w-44"
+                      className="flex flex-col items-center space-y-4 w-36"
                       variants={itemVariants}
                       custom={index}
                       initial="hidden"
@@ -167,35 +154,31 @@ const HowToStart = () => {
                       layout
                     >
                       <motion.div
-                        className="bg-white text-blue-600 w-20 h-20 flex items-center justify-center rounded-full text-3xl shadow-lg hover:shadow-xl transform transition-all"
+                        className="bg-white/90 text-bg-blueCustom w-20 h-20 flex items-center justify-center rounded-2xl text-3xl shadow-lg hover:shadow-xl transform transition-all border-2 border-purple-500/30 hover:border-purple-500"
                         variants={iconVariants}
                         initial="idle"
                         whileHover="hover"
                       >
                         {step.icon}
                       </motion.div>
-                      <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-yellow-300">
+                      <h3 className="text-lg font-bold text-gray-800 tracking-wide">
                         {step.title}
                       </h3>
-                      <p className="text-white/80 text-sm font-light">
-                        {step.description}
-                      </p>
                     </motion.div>
                   ))}
               </div>
 
               <button
                 onClick={handleNext}
-                className="absolute right-0 z-10 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all transform hover:scale-110"
+                className="absolute right-4 z-10 p-3 rounded-full bg-blueCustom hover:bg-blueCustom transition-all transform hover:scale-110 shadow-lg hover:shadow-purple-400/50"
               >
                 <ChevronRight className="w-6 h-6 text-white" />
               </button>
             </motion.div>
 
-            {/* Auto-scroll toggle button */}
             <button
               onClick={toggleAutoScroll}
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-12 bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all"
+              className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-bg-blueCustom hover:bg-blueCustom p-3 rounded-full transition-all shadow-lg hover:shadow-purple-400/50"
             >
               {isAutoScrolling ? (
                 <Pause className="w-5 h-5 text-white" />
@@ -205,17 +188,17 @@ const HowToStart = () => {
             </button>
           </div>
 
-          {/* Progress indicators */}
-          <div className="flex justify-center mt-16 space-x-2">
+          <div className="flex justify-center mt-16 space-x-3">
             {Array.from({ length: Math.ceil(steps.length / itemsPerPage) }).map(
               (_, idx) => (
                 <div
                   key={idx}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     Math.floor(currentIndex / itemsPerPage) === idx
-                      ? "w-8 bg-yellow-400"
-                      : "w-2 bg-white/30"
+                      ? "w-8 bg-blueCustom"
+                      : "w-2 bg-blueCustom bg-blueCustom cursor-pointer"
                   }`}
+                  onClick={() => setCurrentIndex(idx * itemsPerPage)}
                 />
               )
             )}

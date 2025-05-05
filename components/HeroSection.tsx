@@ -14,9 +14,9 @@ const HeroSection = () => {
               transition={{ duration: 0.8 }}
               className="text-white space-y-6"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight font-poppins">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight font-poppins">
                 Hello
-                <span className="text-yellowCustom">
+                <span className="text-yellowCustom font-extrabold">
                   {" "}
                   I&apos;m Khaerul Ilman
                 </span>
@@ -33,20 +33,24 @@ const HeroSection = () => {
                   teknologi.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-6 mt-8">
                 {/* GitHub Button */}
                 <motion.a
                   href="https://github.com/khaerulilman"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="flex items-center justify-center p-2 bg-yellowCustom rounded-full shadow-md hover:bg-gray-700 transition-all duration-300"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 0 25px rgba(255, 215, 0, 0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center p-4 bg-gradient-to-r from-yellowCustom to-yellow-500 rounded-full shadow-lg hover:shadow-yellow-500/50 transition-all duration-300 group relative overflow-hidden"
                 >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blueCustom to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <img
                     src="assets/images/github-logo.png"
-                    alt="GitHub Logo"
-                    className="w-8 h-8"
+                    alt="GitHub"
+                    className="w-8 h-8 relative z-10 group-hover:rotate-12 transition-transform duration-300"
                   />
                 </motion.a>
 
@@ -55,14 +59,18 @@ const HeroSection = () => {
                   href="https://www.linkedin.com/in/khaerul-ilman-091500245/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="flex items-center justify-center p-2 bg-yellowCustom rounded-full shadow-md hover:bg-gray-700 transition-all duration-300"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 0 25px rgba(255, 215, 0, 0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center p-4 bg-gradient-to-r from-yellowCustom to-yellow-500 rounded-full shadow-lg hover:shadow-yellow-500/50 transition-all duration-300 group relative overflow-hidden"
                 >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blueCustom to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <img
                     src="assets/images/linkedin-logo.png"
-                    alt="LinkedIn Logo"
-                    className="w-8 h-8"
+                    alt="LinkedIn"
+                    className="w-8 h-8 relative z-10 group-hover:rotate-12 transition-transform duration-300"
                   />
                 </motion.a>
               </div>
