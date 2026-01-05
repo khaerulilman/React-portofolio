@@ -1,0 +1,162 @@
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: black;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a3e635; /* lime-400 */
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(163, 230, 53, 0.6);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #bef264;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a3e635 rgba(255, 255, 255, 0.03);
+}
+
+/* ========================================
+   PORTFOLIO ANIMATIONS
+   ======================================== */
+
+/* Text Fill Animation - Right to Left (Looping) */
+@keyframes text-fill-ltr-loop {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  15% {
+    clip-path: inset(0 0 0 0);
+  }
+  85% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+.animate-text-fill {
+  animation: text-fill-ltr-loop 3s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  animation-delay: 0.3s;
+}
+
+/* Fade In Up Animation */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Fade In Down Animation */
+@keyframes fade-in-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Fade In Scale Animation */
+@keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Initial hidden states for scroll animations */
+.scroll-hidden {
+  opacity: 0;
+}
+
+.scroll-hidden-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.scroll-hidden-down {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+/* Visible states */
+.scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Wave animation for contribution grid */
+@keyframes wave-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-wave-reveal {
+  animation: wave-reveal 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
