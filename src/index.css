@@ -160,3 +160,19 @@ body,
 .animate-wave-reveal {
   animation: wave-reveal 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}

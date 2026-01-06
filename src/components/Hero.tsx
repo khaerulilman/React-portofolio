@@ -24,14 +24,16 @@ export default function Hero() {
             I'm khaerul ilman{" "}
             <span className="block relative">
               {/* Base text (gray) */}
-              <span className="text-white/40">Back-End Developer</span>
+              <span className="text-white/40">
+                FullStack | Back-End Developer
+              </span>
               {/* Animated overlay (lime) - fills from right to left */}
               <span
                 className="absolute top-0 left-0 py-1 text-lime-400 animate-text-fill"
                 style={{ clipPath: "inset(0 100% 0 0)" }}
                 aria-hidden="true"
               >
-                Back-End Developer
+                FullStack | Back-End Developer
               </span>
 
               {/* Underline accent */}
@@ -48,7 +50,7 @@ export default function Hero() {
 
           <div className="flex items-center gap-6 mt-8">
             <a
-              href="https://linkedin.com/username-kamu"
+              href="https://www.linkedin.com/in/mochammad-khaerul-ilman-091500245/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 bg-lime-400/10 border border-lime-400/30 rounded-full px-6 py-3 hover:bg-lime-400/20 hover:border-lime-400 transition-all duration-300 backdrop-blur-sm group"

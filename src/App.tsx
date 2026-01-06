@@ -8,6 +8,7 @@ import RecentPosts from "./components/RecentPosts";
 import GetInTouch from "./components/GetInTouch";
 import Footer from "./components/Footer";
 import LineStyle from "./components/LineStyle";
+import CertificatesSection from "./components/CertificatesSection";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
       <PortfolioGrid />
       <LineStyle />
       <WorkExperience />
+      <LineStyle />
+      <CertificatesSection />
       <LineStyle />
       <RecentPosts />
       <LineStyle />

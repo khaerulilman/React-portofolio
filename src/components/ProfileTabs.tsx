@@ -2,7 +2,7 @@ import { useState } from "react";
 import TabContent from "./TabContent";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
-const tabs = ["About", "Experience", "Education", "Skills"] as const;
+const tabs = ["About", "Education", "Skills"] as const;
 type Tab = (typeof tabs)[number];
 
 export default function ProfileTabs() {
@@ -28,10 +28,10 @@ export default function ProfileTabs() {
       >
         {/* Background text (gray) */}
         <div className="text-gray-300">
-          I am M. Khaerul Ilman, a Software Engineer with a strong interest in
-          backend development and full-stack engineering. I focus on building
-          reliable, scalable, and well-structured web applications that solve
-          real-world problems.
+          I am M. Khaerul Ilman, a Software Engineer with a strong focus on
+          backend systems and full-stack engineering. I specialize in building
+          robust internal architectures, reliable APIs, and scalable services
+          that power well-structured and maintainable web applications.
         </div>
 
         {/* Foreground text (lime) with animated fill */}
@@ -41,10 +41,10 @@ export default function ProfileTabs() {
             clipPath: isHovered ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
           }}
         >
-          I am M. Khaerul Ilman, a Software Engineer with a strong interest in
-          backend development and full-stack engineering. I focus on building
-          reliable, scalable, and well-structured web applications that solve
-          real-world problems.
+          I am M. Khaerul Ilman, a Software Engineer with a strong focus on
+          backend systems and full-stack engineering. I specialize in building
+          robust internal architectures, reliable APIs, and scalable services
+          that power well-structured and maintainable web applications.
         </div>
       </div>
 

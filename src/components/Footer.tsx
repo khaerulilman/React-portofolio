@@ -8,8 +8,9 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         {/* Left text */}
         <p className="text-sm text-gray-400">
-          Copyright © 2026 <span className="text-lime-400 font-medium">AI</span>
-          . All rights reserved.
+          Copyright © 2026{" "}
+          <span className="text-lime-400 font-medium">Ilman</span>. All rights
+          reserved.
         </p>
 
         {/* Scroll to top */}

@@ -28,7 +28,7 @@ export default function RecentPosts() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-[#141410] text-white py-32 flex justify-center overflow-hidden"
+      className="w-full bg-[#171616] text-white py-32 flex justify-center overflow-hidden"
     >
       <div className="max-w-6xl w-full px-6 grid md:grid-cols-2 gap-20">
         {/* Left - Slides from left */}
