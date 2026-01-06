@@ -64,7 +64,7 @@ const getTechLogoUrl = (tech: string): string => {
     WebSocket:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
   };
-  return logoMap[tech] || "https://via.placeholder.com/40";
+  return logoMap[tech] || "/images/logoapp/not-found.png";
 };
 
 const allProjects = [
@@ -311,8 +311,13 @@ export default function PortfolioGrid() {
                         alt={tech}
                         className="w-6 h-6 object-contain"
                         onError={(e) => {
-                          e.currentTarget.src =
-                            "https://via.placeholder.com/40";
+                          const target = e.currentTarget;
+
+                          // cegah infinite loop
+                          if (!target.dataset.fallback) {
+                            target.dataset.fallback = "true";
+                            target.src = "/fallback-tech.svg";
+                          }
                         }}
                       />
                     </div>
