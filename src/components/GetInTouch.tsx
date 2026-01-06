@@ -44,8 +44,8 @@ export default function GetInTouch() {
             style={{ transitionDelay: isVisible ? "300ms" : "0ms" }}
           >
             <p className="text-gray-400 mb-6 max-w-md">
-              Hello, I'm David Matias, Website & User Interface Designer based
-              in London.
+              Hello, I'm khaerul ilman, Software Engineer & Back-end Dev
+              Enthusiast.
             </p>
 
             <a

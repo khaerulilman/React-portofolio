@@ -1,6 +1,72 @@
 import { useState, useRef, useEffect } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
+const getTechLogoUrl = (tech: string): string => {
+  const logoMap: { [key: string]: string } = {
+    React:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+    TypeScript:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+    Figma:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+    Framer:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framer/framer-original.svg",
+    "React Native":
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+    "Node.js":
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+    Firebase:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
+    Flutter:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
+    Dart: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg",
+    "REST API":
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/restapi/restapi-original.svg",
+    Swift:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg",
+    iOS: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apple/apple-original.svg",
+    Xcode:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xcode/xcode-original.svg",
+    MongoDB:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+    Stripe:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/stripe/stripe-original.svg",
+    "Adobe XD":
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xd/xd-original.svg",
+    Illustrator:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/illustrator/illustrator-original.svg",
+    InDesign:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/indesign/indesign-original.svg",
+    Recharts: "https://recharts.org/images/logo.png",
+    Tailwind:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    Redux:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg",
+    Nodejs:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+    PostgreSQL:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+    GraphQL:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
+    "Next.js":
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+    Vercel:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
+    "Logo Design":
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+    "Brand Guide":
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+    Canva:
+      "https://www.canva.com/_next/image?url=https%3A%2F%2Fcdn.builder.io%2Fapi%2Fv1%2Fimage%2Fassets%2FTEMP%2F8f846bd0d9f54f6a8a8b5c5c5c5c5c5c&w=256&q=75",
+    "Vue.js":
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg",
+    IoT: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original.svg",
+    WebSocket:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+  };
+  return logoMap[tech] || "https://via.placeholder.com/40";
+};
+
 const allProjects = [
   {
     id: 1,
@@ -8,6 +74,7 @@ const allProjects = [
     title: "Brand Identity & Motion Design",
     image:
       "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=900&auto=format&fit=crop",
+    techStack: ["React", "TypeScript", "Figma", "Framer"],
   },
   {
     id: 2,
@@ -15,6 +82,7 @@ const allProjects = [
     title: "Mobile Application Development",
     image:
       "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=900&auto=format&fit=crop",
+    techStack: ["React Native", "Node.js", "Firebase", "TypeScript"],
   },
   {
     id: 3,
@@ -22,6 +90,7 @@ const allProjects = [
     title: "Mobile Application Development",
     image:
       "https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Flutter", "Dart", "Firebase", "REST API"],
   },
   {
     id: 4,
@@ -29,6 +98,7 @@ const allProjects = [
     title: "Mobile Application Development",
     image:
       "https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Swift", "iOS", "Xcode", "Firebase"],
   },
   {
     id: 5,
@@ -36,6 +106,7 @@ const allProjects = [
     title: "E-Commerce Platform",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=900&auto=format&fit=crop",
+    techStack: ["React", "Node.js", "MongoDB", "Stripe"],
   },
   {
     id: 6,
@@ -43,6 +114,7 @@ const allProjects = [
     title: "Corporate Identity System",
     image:
       "https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Figma", "Adobe XD", "Illustrator", "InDesign"],
   },
   {
     id: 7,
@@ -50,6 +122,7 @@ const allProjects = [
     title: "SaaS Dashboard Interface",
     image:
       "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=900&auto=format&fit=crop",
+    techStack: ["React", "TypeScript", "Recharts", "Tailwind"],
   },
   {
     id: 8,
@@ -57,6 +130,7 @@ const allProjects = [
     title: "Social Media App Redesign",
     image:
       "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=900&auto=format&fit=crop",
+    techStack: ["React", "Redux", "Nodejs", "PostgreSQL"],
   },
   {
     id: 9,
@@ -64,6 +138,7 @@ const allProjects = [
     title: "Fitness Tracking App",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=900&auto=format&fit=crop",
+    techStack: ["React Native", "TypeScript", "Firebase", "GraphQL"],
   },
   {
     id: 10,
@@ -71,6 +146,7 @@ const allProjects = [
     title: "Portfolio Website",
     image:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Next.js", "React", "Tailwind", "Vercel"],
   },
   {
     id: 11,
@@ -78,6 +154,7 @@ const allProjects = [
     title: "Restaurant Branding",
     image:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Figma", "Logo Design", "Brand Guide", "Canva"],
   },
   {
     id: 12,
@@ -85,6 +162,7 @@ const allProjects = [
     title: "Smart Home Dashboard",
     image:
       "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Vue.js", "Node.js", "IoT", "WebSocket"],
   },
   {
     id: 13,
@@ -92,6 +170,7 @@ const allProjects = [
     title: "Portfolio Website",
     image:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Next.js", "React", "Tailwind", "Vercel"],
   },
   {
     id: 14,
@@ -99,6 +178,7 @@ const allProjects = [
     title: "Restaurant Branding",
     image:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Figma", "Logo Design", "Brand Guide", "Canva"],
   },
   {
     id: 15,
@@ -106,6 +186,7 @@ const allProjects = [
     title: "Smart Home Dashboard",
     image:
       "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=900&auto=format&fit=crop",
+    techStack: ["Vue.js", "Node.js", "IoT", "WebSocket"],
   },
 ];
 
@@ -217,6 +298,25 @@ export default function PortfolioGrid() {
                   <div className="w-8 h-8 flex items-center justify-center rounded-md bg-white/10 group-hover:bg-lime-400 group-hover:text-black transition">
                     ↗
                   </div>
+                </div>
+                <div className="flex gap-3 mt-4 flex-wrap">
+                  {p.techStack.slice(0, 4).map((tech, idx) => (
+                    <div
+                      key={idx}
+                      className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center overflow-hidden hover:bg-white/20 transition group/logo"
+                      title={tech}
+                    >
+                      <img
+                        src={getTechLogoUrl(tech)}
+                        alt={tech}
+                        className="w-6 h-6 object-contain"
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://via.placeholder.com/40";
+                        }}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             );
